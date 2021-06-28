@@ -15,18 +15,22 @@ public class ProductRepositoryCommandLineRunner implements CommandLineRunner {
     private ProductRepository productRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         List<String> categories = new ArrayList<>(
                 Arrays.asList("smartphone", "shoes", "t-shirts", "food"));
 
-        for (int i=0;i<50;i++) {
-            int random = (int) (Math.random()*4);
+        List<Product> products = new ArrayList<>();
 
-            Product product = new Product(10000+i,
-                    "Product " + i, categories.get(random), i+1.0);
+        for (int i = 0; i < 50; i++) {
+            int random = (int) (Math.random() * 4);
 
-            productRepository.save(product);
+            Product product = new Product(10000 + i,
+                    "Product " + i, categories.get(random), i + 1.0);
+
+            products.add(product);
         }
+
+        productRepository.saveAll(products);
     }
 }
